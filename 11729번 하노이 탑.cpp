@@ -1,59 +1,28 @@
 #include <bits/stdc++.h>
-
+//제귀함수의 대표적인 예제. 하노이의 탑. 
 using namespace std;
 
-string hanoi(int num){
-	int temp;
+void move( int num, int start, int end){
+	// 출발지점과 도착지점 외의 나머지 한 장대.
+	// 1+2+3=6 이고 1,2,3중 2개가 지정되어있으면 전체 합에서 뺸 나머지값이 나머지 장대가 된다. 
+	int left = 6-start-end; 	
+	if(num == 1) {
+		cout<<start<<" "<<end<<"\n"; 
 		
-	for(int i=num; i>0;i--){ // a장대에 입력받은 num만큼 원판 넣 기 
-		a.push(i);
+		return;
 	}
-
-	if(a.top()<c.top()){ //c 장대로 옮 김 
-		temp = a.top();
-		a.pop();
-		c.push(temp);
-		return "1 3";
-	}
-	else if(a.top()<b.top()){ // b장대로 옮김 
-		temp = a.top();
-		a.pop();
-		b.push(temp);
-		return "1 2";
-	}
-	else if(b.top()<c.top()){ // b장대로 옮김 
-		temp = a.top();
-		a.pop();
-		b.push(temp);
-		return "2 3";
-	}
-	else if(c.top()<a.top()){ // a장대로 옮김 
-		temp = c.top();
-		c.pop();
-		a.push(temp);
-		return "3 1";
-	}
-	else if(b.top()<a.top()){ // b장대로 옮김 
-		temp = b.top();
-		b.pop();
-		a.push(temp);
-		return "2 1";
-	}
-	else break; //옮길 곳이 없음 
+	if(num >= 2){
+		//n==1이 되어서 마지막 칸을 옮길때까지 재귀함수로 같은 과정 반복. 
+	move(num-1, start, left); //맨 및판 제외하고 위에꺼 목표지점 외의 나머지로  옮기기. 
+	move(1,start,end); //가장 밑판을 목표지점으로. 
+	move(num-1,left,end); // 다시 밑판 위로 하나씩 쌓기. 
+	} 	
 }
 
 int main(void){
-	stack<int> a, b, c; //장대 
-	int result;
-	int num;
+	int num, count=0;
 	cin >> num;
-	
-	result = hanoi(num);
-	if(result == -1) 
-	
-	//	cout << a.size() <<endl;
-	
-	
-	
+	cout << (1<<num) -1<<"\n";  //시프트연산 : A<<B연산은 결국 A*(2의 B제곱)과 같다. 
+	move(num,1,3);
 	return 0;
 }
